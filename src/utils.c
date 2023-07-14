@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:54:47 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/14 14:12:01 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/14 16:56:07 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,12 @@ char	*find_path(char *cmd, char **envp)
 void	execute(char *argv, char **envp)
 {
 	char	**cmd;
-	int 	i;
+	int		i;
 	char	*path;
-	
+
 	i = -1;
 	cmd = ft_split(argv, ' ');
 	path = find_path(cmd[0], envp);
-	//ft_putstr_fd(path, STDOUT_FILENO);
 	if (!path)
 	{
 		while (cmd[++i])
@@ -99,3 +98,4 @@ void	execute(char *argv, char **envp)
 	if (execve(path, cmd, envp) == -1)
 		ft_error();
 }
+	//ft_putstr_fd(path, STDOUT_FILENO);

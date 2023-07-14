@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:31:50 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/14 14:12:06 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/14 16:59:46 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // this is so i can use waitpid()
 // wait for process to change state
-#include <sys/wait.h>
+# include <sys/wait.h>
 
 // file control options
 # include <fcntl.h>

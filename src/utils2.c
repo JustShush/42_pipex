@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:29:43 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/14 13:10:35 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/14 16:57:26 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	*ft_memset(void *s, int c, size_t n)
 
 void	*ft_calloc(size_t nitems, size_t size)
 {
-	void *ptr;
+	void	*ptr;
 
 	ptr = malloc(size * nitems);
 	if (!ptr)
