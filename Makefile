@@ -3,10 +3,13 @@
 NAME = pipex
 
 CC = @cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRC =	pipex.c	\
+		putstr_fd.c \
 		utils.c \
+		utils2.c \
+		split.c \
 
 
 OBJ_DIR = obj

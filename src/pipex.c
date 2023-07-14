@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:31:45 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/13 14:36:56 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:12:23 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ int main(int argc, char *argv[], char **envp)
 	int		fd[2];
 	pid_t	pid1;
 
-	(void)argv;
-	(void)envp;
-	printf("%d", argc);
 	if(argc != 5)
 		ft_error();
 	if (pipe(fd) == -1)
