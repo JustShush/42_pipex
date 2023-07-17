@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:25:56 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/14 16:57:40 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:35:13 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,11 @@ void	ft_putstr_fd(char *s, int fd)
 			ft_putchar_fd(*s++, fd);
 		}
 	}
+}
+
+int	ft_isspace(int c)
+{
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	return (0);
 }

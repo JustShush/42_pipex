@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:31:45 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/14 16:58:55 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:35:46 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,32 @@ void	parent_process(char **argv, char **envp, int *fd)
 	execute(argv[3], envp);
 }
 
+int	check_args(char **argv)
+{
+	size_t		i;
+	char		*arg;
+
+	i = 0;
+	arg = argv[i];
+	if (arg[i] == '\0')
+		ft_error();
+	while (arg[i])
+	{
+		if (ft_isspace(arg[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	int		fd[2];
 	pid_t	pid1;
 
 	if (argc != 5)
+		ft_error();
+	if (check_args(&argv[2]) == 1 || check_args(&argv[3]) == 1)
 		ft_error();
 	if (pipe(fd) == -1)
 		ft_error();
@@ -54,4 +74,4 @@ int	main(int argc, char *argv[], char **envp)
 	parent_process(argv, envp, fd);
 	return (0);
 }
-// ./pipex infile "cmd1" | "cmd2" outfile
+// ./pipex infile "cmd1" "cmd2" outfile

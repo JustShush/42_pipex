@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:31:50 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/14 16:59:46 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:35:24 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 
 // in putstr_fd.c
 void	ft_putstr_fd(char *s, int fd);
+int		ft_isspace(int c);
 // -----------------
 
 // in split.c
