@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:54:47 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/14 16:56:07 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:10:26 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,26 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t			i;
+	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (-1);
 	while (s[i])
 		i++;
 	return (i);
 }
 
-void	ft_error(void)
+void	ft_error(char *msg)
 {
-	perror("\033[31mError\033[0m");
-	exit(0);
+	if (!msg)
+		perror("Error");
+	else
+	{
+		msg = ft_strjoin(msg, "\n");
+		ft_putstr_fd(msg, 2);
+	}
+	exit(1);
 }
 
 char	*ft_strnstr(const char	*big, const char *little, size_t len)
@@ -58,6 +66,12 @@ char	*find_path(char *cmd, char **envp)
 	char	*part_path;
 
 	i = 0;
+	if(!cmd || ft_strnstr(cmd, "/", 2) != NULL) // checks if iam passing absolute paths(binary cmds)
+	{
+		if (access(cmd, F_OK | X_OK) == 0) // if i can exec or find the cmd
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
 	paths = ft_split(envp[i] + 5, ':');
@@ -67,8 +81,11 @@ char	*find_path(char *cmd, char **envp)
 		part_path = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(part_path, cmd);
 		free(part_path);
-		if (access(path, F_OK) == 0)
+		if (access(path, F_OK | X_OK) == 0) // if i can exec or find the cmd
+		{
+			free(paths);
 			return (path);
+		}
 		free(path);
 		i++;
 	}
@@ -79,7 +96,7 @@ char	*find_path(char *cmd, char **envp)
 	return (0);
 }
 
-void	execute(char *argv, char **envp)
+void	execute(char *argv, char **envp, int *dups)
 {
 	char	**cmd;
 	int		i;
@@ -93,9 +110,19 @@ void	execute(char *argv, char **envp)
 		while (cmd[++i])
 			free(cmd[i]);
 		free(cmd);
-		ft_error();
+		close(dups[0]);
+		close(dups[1]);
+		ft_error("pipex: command not found");
 	}
 	if (execve(path, cmd, envp) == -1)
-		ft_error();
+	{
+		while (cmd[++i])
+			free(cmd[i]);
+		free(cmd);
+		free(path);
+		close(dups[0]);
+		close(dups[1]);
+		ft_error(NULL);
+	}
 }
-	//ft_putstr_fd(path, STDOUT_FILENO);
+// execve duplicates the process again, so if i write a printf after it it will not run.

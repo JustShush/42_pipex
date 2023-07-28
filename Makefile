@@ -3,13 +3,15 @@
 NAME = pipex
 
 CC = @cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRC =	pipex.c	\
-		putstr_fd.c \
-		utils.c \
-		utils2.c \
-		split.c \
+# -fsanitize=address
+
+SRC =	pipex.c		\
+		putstr_fd.c	\
+		split.c		\
+		utils.c		\
+		utils2.c	\
 
 
 OBJ_DIR = obj
@@ -92,7 +94,7 @@ On_IWhite='\033[0;107m'   # White
 MSG1 = @echo ${IGreen}"Compiled Successfully ✔︎"${Color_Off}
 MSG2 = @echo ${IYellow}"Cleaned Successfully ✔︎"${Color_Off}
 MSG3 = @echo ${ICyan}"Cleaned ${NAME} Successfully ✔︎"${Color_Off}
-HOWTO = @echo ${IRed}"To run the program do: ./${NAME} infile 'cmd1' | 'cmd2' outfile"${Color_Off}
+HOWTO = @echo ${IRed}"To run the program do: ./${NAME} infile 'cmd1' 'cmd2' outfile"${Color_Off}
 
 all: $(NAME)
 
@@ -102,8 +104,8 @@ $(NAME): $(OBJS)
 	${HOWTO}
 
 $(OBJ_DIR)/%.o: $(SRCS)
-		@mkdir -p $(OBJ_DIR)
-		@$(CC) $(CFLAGS) -o $@ -c $<
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -o $@ -c $<
 clean:
 	@/bin/rm -rf $(OBJ_DIR)
 	$(MSG2)
@@ -111,18 +113,5 @@ clean:
 fclean: clean
 	@/bin/rm -rf $(NAME) ${OBJ_DIR}
 	$(MSG3)
-
-party:
-					@printf "\033c"
-					@echo "\n\033[35m♪┏(・o･)┛♪"
-					@sleep 0.5
-					@printf "\033c"
-					@echo "\033[1;33m♪┗(・o･)┓♪"
-					@sleep 0.5
-					@printf "\033c"
-					@echo "\n\033[36m♪┏(・o･)┛♪"
-					@sleep 0.5
-					@printf "\033c"
-					@echo "\033[34m♪┗(・o･)┓♪\n"
 
 re: fclean all

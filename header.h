@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:31:50 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/17 13:35:24 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:13:06 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 // this is so i can use waitpid()
 // wait for process to change state
 # include <sys/wait.h>
+
+// this is for the errno (its the number of the error msg, then strerr() prints the correct error msg)
+#include <errno.h>
 
 // file control options
 # include <fcntl.h>
@@ -38,13 +41,14 @@ char	**ft_split(char const *str, char c);
 
 // in utils.c
 size_t	ft_strlen(const char *s);
-void	ft_error(void);
-void	execute(char *argv, char **envp);
+void	ft_error(char *msg);
+void	execute(char *argv, char **envp, int *dups);
 // -----------------
 
 // in utils2.c
 char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_calloc(size_t nitems, size_t size);
+char	*ft_strdup(char *str);
 // -----------------
 
 #endif
