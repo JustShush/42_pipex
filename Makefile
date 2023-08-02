@@ -12,6 +12,7 @@ SRC =	pipex.c		\
 		split.c		\
 		utils.c		\
 		utils2.c	\
+		utils3.c	\
 
 
 OBJ_DIR = obj
@@ -113,5 +114,8 @@ clean:
 fclean: clean
 	@/bin/rm -rf $(NAME) ${OBJ_DIR}
 	$(MSG3)
+
+val:
+	valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all ./pipex in ls sssss out
 
 re: fclean all

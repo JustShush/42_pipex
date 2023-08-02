@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:29:43 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/28 13:49:30 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/08/02 12:23:17 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,4 @@ void	*ft_calloc(size_t nitems, size_t size)
 		return (NULL);
 	ft_memset(ptr, 0, size * nitems);
 	return (ptr);
-}
-
-char	*ft_strdup(char *str)
-{
-	size_t	len;
-
-	if (!str)
-		return (NULL);
-	len = ft_strlen(str);
-	char *new = malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return (NULL);
-	ft_strlcpy(new, str, len + 1);
-	return (new);
 }

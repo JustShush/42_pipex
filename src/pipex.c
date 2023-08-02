@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 10:31:45 by dimarque          #+#    #+#             */
-/*   Updated: 2023/07/28 16:18:53 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/08/02 13:09:28 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ void	second_process(char **argv, char **envp, int *fd)
 	execute(argv[3], envp, dp2);
 }
 
+void	close_fd(int *fd)
+{
+	close(fd[0]);
+	close(fd[1]);
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	int		fd[2];
@@ -57,19 +63,20 @@ int	main(int argc, char *argv[], char **envp)
 	if (pipe(fd) == -1)
 		ft_error(NULL);
 	pid1 = fork();
-	if(pid1 < 0)
+	if (pid1 < 0)
 		ft_error(NULL);
 	if (pid1 == 0)
 		child_process(argv, envp, fd);
 	close(fd[1]);
 	pid2 = fork();
-	if(pid2 < 0)
+	if (pid2 < 0)
 		ft_error(NULL);
 	if (pid2 == 0)
 		second_process(argv, envp, fd);
 	close(fd[0]);
 	waitpid(-1, NULL, 0);
-	waitpid(-1, NULL, 0); // the -1 will check against any child pid (could use WAIT_ANY for clarity also)
+	waitpid(-1, NULL, 0);
 	return (0);
 }
 // ./pipex infile "cmd1" "cmd2" outfile
+// the -1 will check against any child pid (could use WAIT_ANY for clarity also)
